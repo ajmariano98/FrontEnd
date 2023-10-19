@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+#NavBar {
+    background-color: #1453a7;
+}
+.navbar {
+    background-color: rgb(24, 228, 24);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; /* Otra configuración de fuente si es necesario */
+    /* Otras propiedades de estilo para tu barra de navegación */
+}
+
+
+
+.navbar a {
+    color: #000000;
+    /* Cambia #fff por el color de texto que desees */
+    text-decoration: none;
+    /* Elimina la subraya de los enlaces */
+}
+
+.navbar a:hover {
+    color: #184fb6;
+    /* Cambia #ff8c00 por el color que desees al pasar el ratón por encima del enlace */
+}
+
+.navbar-brand img {
+    width: 60px;
+    /* Cambia el ancho del logo al tamaño que desees */
+    height: 60px;
+    /* Cambia la altura del logo al tamaño que desees */
+}
+
+
+
+.navbar {
+    padding: 0px;
+    margin-bottom: 20px;
+    /* Agrega margen en la parte inferior de la barra de navegación */
+}
+
+.navbar-nav {
+    margin: 0;
+    /* Elimina cualquier margen predeterminado en la lista de navegación */
+    padding: 0;
+    /* Elimina cualquier espacio interno en la lista de navegación */
+}
+
+.nav-item {
+    margin-right: 10px;
+    /* Agrega margen derecho entre elementos de la lista */
+}
+
+.nav-link {
+    color: rgba(0, 0, 0, 0.616) !important; /* Cambia 'red' al color que desees */
+}
+
+.nav-link:hover {
+    color: rgba(10, 92, 216, 0.616) !important; /* Cambia 'red' al color que desees */
+}
+
+.btn.btn-outline-success {
+    background-color: #3e3e42;
+    border-color: #021f44;
+    color: white;
+}
+
+.nav-item.dropdown {
+    margin-bottom: 0px;
+}
+
+/* Agregar estilos para la parte derecha ajustada */
+.navbar-nav.ml-auto {
+    /* Ajusta la parte derecha de la barra a la derecha */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-expand-lg {
+    background-color: #021f44;
+}
+

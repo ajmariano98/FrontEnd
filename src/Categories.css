@@ -1,0 +1,38 @@
+
+.btn-categories {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    text-align: center; 
+    line-height: 20px; 
+    border: none; 
+    background-color: #007bff; 
+    color: white;
+    cursor: pointer; 
+  }
+  
+  
+  .btn-categories:hover {
+    background-color: #0056b3; 
+  }
+  
+  .container {
+    margin-top: 20px;
+  }
+  
+  .table {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .modal-title {
+    color: #343a40;
+  }
+  
+  .modal-body {
+    font-weight: bold;
+  }
+  
+  .modal-footer button {
+    width: 100px;
+  }
