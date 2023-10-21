@@ -1,9 +1,9 @@
 import { Route, Routes} from 'react-router-dom';
-import { Home } from './Home';
+import Home from './Home';
 import NavBar from './NavBar';
-import { RegisterUser } from './RegisterUser';
-import { Users } from './Users';
-import { RegisterProduct } from './RegisterProduct';
+import RegisterUser from './RegisterUser';
+import Users from './Users';
+import RegisterProduct from './RegisterProduct';
 import  Categories  from './Categories';
 import Login from './Login';
 import ListProducts from './ListProducts';

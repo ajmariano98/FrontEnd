@@ -212,18 +212,21 @@ export default function Products() {
                       <td>
                         <button
                           className="btn btn-primary material-symbols-outlined"
+                          title='Editar Producto'
                           onClick={() => editProduct(product.product_id)}
                         >
                           edit
                         </button>
                         <button
                           className="btn btn-danger material-symbols-outlined"
+                          title='Borrar Producto'
                           onClick={() => deleteProduct(product.product_id)}
                         >
                           delete
                         </button>
                         <button
                           className="btn btn-success material-symbols-outlined"
+                          title='Agregar al Carrito'
                           onClick={() => addToCart(product.product_id)}
                         >
                           add_shopping_cart
@@ -311,11 +314,12 @@ export default function Products() {
                       <td>{formatAsCurrency(product.price)}</td>
                       <td>{product.description}</td>
                       <td>
-                        <button
-                          className="btn btn-success"
+                      <button
+                          className="btn btn-success material-symbols-outlined"
+                          title='Agregar al Carrito'
                           onClick={() => addToCart(product.product_id)}
                         >
-                          Agregar al Carrito
+                          add_shopping_cart
                         </button>
                       </td>
                     </tr>

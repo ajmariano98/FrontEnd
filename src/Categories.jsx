@@ -78,7 +78,7 @@ export default function Categories() {
             closeModal();
             loadCategories();
           } else if (data.error) {
-            toast.warn(data.error, {
+            toast.error(data.error, {
               position: 'bottom-center',
               autoClose: 3000,
               hideProgressBar: false,

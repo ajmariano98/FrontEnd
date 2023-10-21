@@ -1,45 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export class RegisterProduct extends Component {
-  constructor(props) {
-    super(props);
+export default function RegisterProduct() {
+  const [name, setName] = useState('');
+  const [brand, setBrand] = useState('');
+  const [category_id, setCategory] = useState('');
+  const [price, setPrice] = useState(0);
+  const [photo, setPhoto] = useState('');
+  const [description, setDescription] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [token, setToken] = useState('');
+  const [userData, setUserData] = useState([]);
 
-    this.state = {
-      name: '',
-      brand: '',
-      category_id: '', // Valor por defecto, inicializado en ''
-      price: 0,
-      photo: '',
-      description: '',
-      categories: [] // Lista de categorías
-    };
-  }
+  useEffect(() => {
+    const t = sessionStorage.getItem('token');
+    const userLogged = sessionStorage.getItem('userData');
+    if (userLogged) {
+      setUserData(JSON.parse(userLogged));
+    }
+    if (t !== token) {
+      setToken(t);
+    }
+  }, [token]);
 
-  componentDidMount() {
-    this.loadCategories(); // Cargar la lista de categorías al montar el componente
-  }
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
-  // Cargar la lista de categorías desde el servidor
-  loadCategories() {
+  const loadCategories = () => {
     fetch('http://localhost:8080/categorieslist')
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ categories: data });
+        setCategories(data);
+      })
+      .catch((error) => {
+        console.error('Error al cargar las categorías', error);
       });
-  }
+  };
 
-  // Manejar el envío del formulario
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    // Recolecta los valores del formulario y realiza la acción de registro en tu backend
+    
     const product = {
-      name: this.state.name,
-      brand: this.state.brand,
-      category_id: this.state.category_id,
-      price: this.state.price,
-      photo: this.state.photo,
-      description: this.state.description,
+      name,
+      brand,
+      category_id,
+      price,
+      photo,
+      description,
     };
 
     let fetchData = {
@@ -47,64 +56,87 @@ export class RegisterProduct extends Component {
       body: JSON.stringify(product),
       headers: {
         'Content-Type': 'application/json',
-      }
-    }
+      },
+    };
 
     fetch('http://localhost:8080/registerproducts', fetchData)
-      .then(res => res.json())
-      .then(result => {
-        if (result.error) {
-          // La respuesta contiene un error
-          console.error(result.error);
-          alert(result.error);
-        } else if (result.message) {
-          // La solicitud fue exitosa
-          console.log(result.message);
-          alert(result.message);
-        }
-
-        
-      })
-      .catch(error => {
-        // Manejar errores en la solicitud
-        console.error(error);
-        alert('Error en la solicitud');
-      });
+      .then((res) => res.json())
+      .then(handleRegistrationResponse)
+      .catch(handleRegistrationError);
   };
 
-  // Manejar cambios en los campos del formulario
-  handleChange = (event) => {
+  const handleRegistrationResponse = (result) => {
+    if (result.error) {
+      console.error(result.error);
+      toast.error(result.error, getToastOptions());
+    } else if (result.message) {
+      console.log(result.message);
+      toast.success(result.message, getToastOptions());
+      clearForm();
+    }
+  };
+
+  const handleRegistrationError = (error) => {
+    console.error('Error en la solicitud', error);
+    toast.error('Error en la solicitud', getToastOptions());
+  };
+
+  const clearForm = () => {
+    setName('');
+    setBrand('');
+    setCategory('');
+    setPrice(0);
+    setPhoto('');
+    setDescription('');
+  };
+
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
-    // Si se ha seleccionado una categoría distinta de "Ninguna", elimina la opción "Ninguna"
     if (name === 'category_id' && value !== '0') {
-      const select = event.target;
-      const ningunaOption = select.querySelector('option[value="0"]');
-      if (ningunaOption) {
-        select.removeChild(ningunaOption);
-      }
-
+      setCategory(value);
+    } else {
+      setCategory('');
     }
 
-    this.setState({ [name]: value });
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'brand':
+        setBrand(value);
+        break;
+      case 'price':
+        setPrice(value);
+        break;
+      case 'photo':
+        setPhoto(value);
+        break;
+      case 'description':
+        setDescription(value);
+        break;
+      default:
+        break;
+    }
   };
 
-   // Limpiar el formulario
-   clearForm() {
-    this.setState({
-      name: '',
-      brand: '',
-      category_id: '', // Restaurar al valor por defecto ('')
-      price: 0,
-      photo: '',
-      description: '',
-    });
-  }
+  const getToastOptions = () => {
+    return {
+      position: 'bottom-center',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    };
+  };
 
-  render() {
+  if (token !== '' && token !== null && userData && userData.rol_id === 1) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <div className="mb-3">
               <label htmlFor="inputName" className="form-label">
@@ -114,8 +146,8 @@ export class RegisterProduct extends Component {
                 type="text"
                 className="form-control"
                 name="name"
-                onChange={this.handleChange}
-                value={this.state.name}
+                onChange={handleChange}
+                value={name}
                 required
               />
             </div>
@@ -127,8 +159,8 @@ export class RegisterProduct extends Component {
                 type="text"
                 className="form-control"
                 name="brand"
-                onChange={this.handleChange}
-                value={this.state.brand}
+                onChange={handleChange}
+                value={brand}
                 required
               />
             </div>
@@ -139,14 +171,14 @@ export class RegisterProduct extends Component {
               <select
                 className="form-select"
                 name="category_id"
-                value={this.state.category_id}
-                onChange={this.handleChange}
+                value={category_id}
+                onChange={handleChange}
                 required
               >
                 <option value="" disabled>
                   Seleccione una categoría
                 </option>
-                {this.state.categories.map((category) => (
+                {categories.map((category) => (
                   <option key={category.category_id} value={category.category_id}>
                     {category.category_name}
                   </option>
@@ -161,8 +193,8 @@ export class RegisterProduct extends Component {
                 type="number"
                 className="form-control"
                 name="price"
-                onChange={this.handleChange}
-                value={this.state.price}
+                onChange={handleChange}
+                value={price}
                 required
               />
             </div>
@@ -174,8 +206,8 @@ export class RegisterProduct extends Component {
                 type="url"
                 className="form-control"
                 name="photo"
-                onChange={this.handleChange}
-                value={this.state.photo}
+                onChange={handleChange}
+                value={photo}
                 required
               />
             </div>
@@ -186,8 +218,8 @@ export class RegisterProduct extends Component {
               <textarea
                 className="form-control"
                 name="description"
-                onChange={this.handleChange}
-                value={this.state.description}
+                onChange={handleChange}
+                value={description}
                 required
               />
             </div>
@@ -196,12 +228,16 @@ export class RegisterProduct extends Component {
             <button type="submit" className="btn btn-primary">
               Cargar
             </button>
-            <button type="button" className="btn btn-secondary" onClick={this.clearForm.bind(this)}>
+            <button type="button" className="btn btn-secondary" onClick={clearForm}>
               Limpiar
             </button>
           </div>
         </form>
       </div>
+    );
+  } else {
+    return (
+      <h2>Sin acceso</h2>
     );
   }
 }

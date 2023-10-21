@@ -1,10 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-export class Home extends Component {
-  render() {
+export default function Home() {
+  
+  
     return (
-        <h1>Este es el home</h1>
+      <div id="carouselExampleFade" class="carousel slide carousel-fade">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://imagedelivery.net/coazEmlpsaEeLgEQn76AbA/dd0ba447-557c-4c63-88c9-a659d8b59500/public" class="d-block w-100" alt="..."/>
+        </div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="..."/>
+        </div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="..."/>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
     );
-  }
+  
 }
