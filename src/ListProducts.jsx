@@ -11,6 +11,7 @@ export default function ListProducts() {
   const [modal, setModal] = useState(false);
   const [editingProductId, setEditingProductId] = useState(null);
   const [token, setToken] = useState('');
+  const [userData, setUserData] = useState([]);
 
   const loadProducts = () => {
     fetch('http://localhost:8080/productslist')
@@ -41,12 +42,16 @@ export default function ListProducts() {
 
 
   useEffect(() => {
-    const t = sessionStorage.getItem('token')
+    const t = sessionStorage.getItem('token');
+    const userLogged = sessionStorage.getItem('userData');
+    if (userLogged) {
+      setUserData(JSON.parse(userLogged));
+    }
     if (t !== token) {
-      setToken(t)
-    };
-    loadProducts();
+      setToken(t);
+    }
     loadCategories();
+    loadProducts();
   }, [token]);
 
   const formatAsCurrency = (value) => {
@@ -108,6 +113,7 @@ export default function ListProducts() {
     }
   };
 
+  if (token !== '' && token !== null && userData && userData.rol_id === 1) {
   return (
     <>
       <div className="container">
@@ -196,4 +202,11 @@ export default function ListProducts() {
       )}
     </>
   );
+} else {
+  return (
+    <>
+      <h1>Acceso denegado</h1>
+    </>
+    );
+}
 }

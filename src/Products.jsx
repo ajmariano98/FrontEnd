@@ -120,7 +120,7 @@ export default function Products() {
   };
 
   const addToCart = (product_id) => {
-    // Reemplaza 'userId' con la forma correcta de obtener el ID del usuario de userData.
+  if (userData.rol_id === 1 || userData.rol_id === 2 ){
 
     fetch('http://localhost:8080/cart', {
       method: 'POST',
@@ -144,7 +144,7 @@ export default function Products() {
             theme: 'colored',
           });
         } else if (data.error) {
-          toast.warn(data.error, {
+          toast.error(data.error, {
             position: 'bottom-center',
             autoClose: 3000,
             hideProgressBar: false,
@@ -156,6 +156,18 @@ export default function Products() {
           });
         }
       });
+    } else {
+      toast.error("Inicie sesión para habilitar el carrito", {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
   };
 
 

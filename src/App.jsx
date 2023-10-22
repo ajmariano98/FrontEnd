@@ -2,7 +2,7 @@ import { Route, Routes} from 'react-router-dom';
 import Home from './Home';
 import NavBar from './NavBar';
 import RegisterUser from './RegisterUser';
-import Users from './Users';
+import ListUsers from './ListUsers';
 import RegisterProduct from './RegisterProduct';
 import  Categories  from './Categories';
 import Login from './Login';
@@ -25,7 +25,7 @@ export default function App() {
     <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<RegisterUser />}></Route>
       <Route path="/home" element={<Home />}></Route>
-      <Route path="/userslist" element={<Users />}></Route>
+      <Route path="/listusers" element={<ListUsers />}></Route>
       <Route path="/registerproduct" element={<RegisterProduct />}></Route>
       <Route path="/categories" element={<Categories />}></Route>
       <Route path="/listproducts" element={<ListProducts />}></Route>

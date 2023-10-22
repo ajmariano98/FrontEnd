@@ -281,7 +281,7 @@ export default function Categories() {
   } else {
     return (
       <>
-        <h2>Sin acceso</h2>
+        <h2>Acceso denegado</h2>
       </>
     );
   }

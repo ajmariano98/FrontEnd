@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function RegisterUser() {
   const [user, setUser] = useState({
@@ -29,13 +31,27 @@ export default function RegisterUser() {
       .then((res) => res.json())
       .then((result) => {
         if (result.error) {
-          // La respuesta contiene un error
-          console.error(result.error);
-          alert(result.error);
+          toast.error(result.error, {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         } else if (result.message) {
-          // La solicitud fue exitosa
-          console.log(result);
-          alert(result.message);
+          toast.success(result.message, {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
       });
   };
