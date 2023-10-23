@@ -1,82 +1,85 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 #NavBar {
-    background-color: #1453a7;
+    background-color: #292929;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    position: fixed;
+    top: 0; /* Coloca la barra en la parte superior de la ventana */
+    left: 0; /* Puedes ajustar esto para controlar la posición horizontal */
+    right: 0; /* Puedes ajustar esto para controlar la posición horizontal */
+    z-index: 999; /* Asegura que la barra de navegación esté por encima de otros elementos */
 }
+
+nav {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    margin-bottom: 1%;
+    
+}
+
 .navbar {
-    background-color: rgb(24, 228, 24);
     font-family: 'Montserrat', sans-serif;
-    font-weight: 700; /* Otra configuración de fuente si es necesario */
-    /* Otras propiedades de estilo para tu barra de navegación */
+    font-weight: 750;
 }
 
 
+  .nav-link {
+    color: rgb(255, 255, 255) !important;
+    display: flex; /* Utiliza display flex para centrar horizontalmente los elementos internos */
+    align-items: center; /* Centra verticalmente los elementos internos en el enlace */
+    text-decoration: none; /* Elimina la subrayado del enlace */
+  }
 
-.navbar a {
-    color: #000000;
-    /* Cambia #fff por el color de texto que desees */
-    text-decoration: none;
-    /* Elimina la subraya de los enlaces */
+.nav-link:hover {
+    color: rgb(255, 255, 255) !important;
+    background-image: linear-gradient(to top, #646464, transparent);
+    border-radius: 10px
 }
 
-.navbar a:hover {
-    color: #184fb6;
-    /* Cambia #ff8c00 por el color que desees al pasar el ratón por encima del enlace */
-}
+.custom-navbar .material-symbols-outlined {
+    font-size: 40px !important;
+    /* Otros estilos para el icono aquí */
+  }
 
 .navbar-brand img {
     width: 60px;
-    /* Cambia el ancho del logo al tamaño que desees */
     height: 60px;
-    /* Cambia la altura del logo al tamaño que desees */
-}
-
-
-
-.navbar {
-    padding: 0px;
-    margin-bottom: 20px;
-    /* Agrega margen en la parte inferior de la barra de navegación */
 }
 
 .navbar-nav {
     margin: 0;
-    /* Elimina cualquier margen predeterminado en la lista de navegación */
     padding: 0;
-    /* Elimina cualquier espacio interno en la lista de navegación */
 }
 
 .nav-item {
     margin-right: 10px;
-    /* Agrega margen derecho entre elementos de la lista */
 }
 
-.nav-link {
-    color: rgba(0, 0, 0, 0.616) !important; /* Cambia 'red' al color que desees */
-}
 
-.nav-link:hover {
-    color: rgba(10, 92, 216, 0.616) !important; /* Cambia 'red' al color que desees */
-}
-
-.btn.btn-outline-success {
-    background-color: #3e3e42;
-    border-color: #021f44;
+.custom-navbar .btn.btn-outline-success {
+    background-color: #272727 !important;
+    border-color: #ffffff;
     color: white;
 }
 
-.nav-item.dropdown {
-    margin-bottom: 0px;
+.custom-navbar .btn.btn-outline-success:hover {
+    background-image: linear-gradient(to top, #646464, transparent);
+    border-color: #ffffff;
+    color: white;
 }
 
-/* Agregar estilos para la parte derecha ajustada */
+.custom-navbar .form-control:focus {
+    border-color: white; /* Cambia el color del borde al blanco cuando el input está enfocado */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Cambia el brillo del borde cuando el input está enfocado */
+}
+
+.nav-item.dropdown {
+    margin-bottom: 0;
+}
+
 .navbar-nav.ml-auto {
-    /* Ajusta la parte derecha de la barra a la derecha */
     display: flex;
     align-items: center;
-}
-
-.navbar-expand-lg {
-    background-color: #021f44;
 }
 

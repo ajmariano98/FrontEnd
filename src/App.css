@@ -1,0 +1,4 @@
+/* Ajusta el padding-top del contenedor del contenido para evitar que se oculte detrás de la barra de navegación */
+#components {
+    padding-top: 90px; /* Ajusta el valor según la altura de tu barra de navegación */
+}

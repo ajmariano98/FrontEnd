@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Account from './Account';
 import Products from './Products';
 import Cart from './Cart';
+import './App.css';
 
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
    return (
     <>
     <NavBar/>
-    <div className="container">
+    <div className="container" id="components">
     <Routes>
     <Route path="/account" element={<Account />}></Route>
     <Route path="/login" element={<Login />}></Route>
