@@ -9,7 +9,6 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState(''); // Establece un valor predeterminado aquí
   const [productsList, setProductsList] = useState([]);
   const [productToDelete, setProductToDelete] = useState(null);
-  const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
   const [modal, setModal] = useState(false);
   const [editingProductId, setEditingProductId] = useState(null);
   const [token, setToken] = useState('');
@@ -76,14 +75,13 @@ export default function Products() {
 
   const closeModal = () => {
     setModal(false);
-    setModalDeleteProduct(false);
     setEditingProductId(null);
     loadProducts();
   };
 
   const deleteProduct = (product_id) => {
     setProductToDelete(product_id);
-    setModalDeleteProduct(true);
+    setModal(true);
   };
 
   const confirmDelete = () => {
@@ -194,59 +192,58 @@ export default function Products() {
               </select>
             </div>
             <div class="col-md-9 products">
-              <ul class="product-list">
-                {productsList.map((product) => (
-                  <li key={product.product_id} class="product-card rounded">
-                    <div class="product-image">
-                      <img
-                        src={product.photo}
-                        alt={product.name}
-                      />
-                    </div>
-                    <div class="product-details">
-                      <h3 id="h3-name">{product.name}</h3>
-                      <p id="p-brand">{product.brand}</p>
-                      <p id="p-category">{categories.find((c) => c.category_id === product.category_id)?.category_name}</p>
-                      <p id="p-price">{formatAsCurrency(product.price)}</p>
-                    </div>
-                    <div class="product-actions">
-                      <button
-                        class="btn btn-primary material-symbols-outlined"
-                        title="Editar Producto"
-                        onClick={() => editProduct(product.product_id)}
-                      >
-                        edit
-                      </button>
-                      <button
-                        class="btn btn-danger material-symbols-outlined"
-                        title="Borrar Producto"
-                        onClick={() => deleteProduct(product.product_id)}
-                      >
-                        delete
-                      </button>
-                      <button
-                        class="btn btn-success material-symbols-outlined"
-                        title="Agregar al Carrito"
-                        onClick={() => addToCart(product.product_id)}
-                      >
-                        add_shopping_cart
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+      <ul class="product-list">
+        {productsList.map((product) => (
+          <li key={product.product_id} class="product-card rounded">
+            <div class="product-image">
+              <img
+                src={product.photo}
+                alt={product.name}
+              />
             </div>
-          </div>
-        </div>
+            <div class="product-details">
+              <h3 id="h3-name">{product.name}</h3>
+              <p id="p-brand">{product.brand}</p>
+              <p id="p-category">{categories.find((c) => c.category_id === product.category_id)?.category_name}</p>
+              <p id="p-price">{formatAsCurrency(product.price)}</p>
+            </div>
+            <div class="product-actions">
+              <button
+                class="btn btn-primary material-symbols-outlined"
+                title="Editar Producto"
+                onClick={() => editProduct(product.product_id)}
+              >
+                edit
+              </button>
+              <button
+                class="btn btn-danger material-symbols-outlined"
+                title="Borrar Producto"
+                onClick={() => deleteProduct(product.product_id)}
+              >
+                delete
+              </button>
+              <button
+                class="btn btn-success material-symbols-outlined"
+                title="Agregar al Carrito"
+                onClick={() => addToCart(product.product_id)}
+              >
+                add_shopping_cart
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
 
 
 
-        <Modal id="ModalDeleteProduct" show={modalDeleteProduct} onHide={closeModal}>
-          <Modal.Header>
-            <Modal.Title>Eliminar Producto</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>¿Seguro que deseas eliminar este producto?</Modal.Body>
-          <Modal.Footer className='justify-content-center'>
+        <Modal show={modal} onHide={closeModal}>
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Title>Confirmación de eliminación</Modal.Title>
+          <Modal.Body>¿Seguro que deseas eliminar el producto?</Modal.Body>
+          <Modal.Footer>
             <Button variant="danger" onClick={confirmDelete}>
               Confirmar
             </Button>
@@ -256,7 +253,7 @@ export default function Products() {
           </Modal.Footer>
         </Modal>
         {editingProductId && (
-          <Modal id="ModalEditingProduct" show={modal} onHide={closeModal}>
+          <Modal show={modal} onHide={closeModal}>
             <Modal.Body>
               <EditProduct product_id={editingProductId} onClose={closeModal} />
             </Modal.Body>

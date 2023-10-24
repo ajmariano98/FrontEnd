@@ -61,10 +61,16 @@ export default function RegisterUser() {
       });
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    console.log({ user, [name]: value })
-    setUser({ user, [name]: value });
+  const handleUsernameChange = (event) => {
+    setUser({ ...user, username: event.target.value });
+  };
+  
+  const handleEmailChange = (event) => {
+    setUser({ ...user, email: event.target.value });
+  };
+  
+  const handlePasswordChange = (event) => {
+    setUser({ ...user, password: event.target.value });
   };
 
   return (
@@ -80,7 +86,7 @@ export default function RegisterUser() {
         placeholder="Mínimo de 4 caracteres." 
         id="inputUsername" 
         minLength={4} 
-        onChange={handleChange}
+        onChange={handleUsernameChange}
         name="username"
         value={user.username} 
         required/>
@@ -90,7 +96,7 @@ export default function RegisterUser() {
         autoComplete='off' 
         placeholder="user@example.com" 
         id="inputEmail" 
-        onChange={handleChange}
+        onChange={handleEmailChange}
         name="email"
         value={user.email} 
         required
@@ -101,7 +107,7 @@ export default function RegisterUser() {
         placeholder="Mínimo de 4 caracteres." 
         id="inputPassword" 
         minLength={4} 
-        onChange={handleChange} 
+        onChange={handlePasswordChange}  
         value={user.password}
         name="password"
         required

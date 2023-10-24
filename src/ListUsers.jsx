@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import './ListUsers.css'
 
 export default function ListUsers() {
   const [listUsers, setlistUsers] = useState([]);
   const [modalDeleteUser, setModalDeleteUser] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserUsername, setSelectedUserUsername] = useState(null);
   const [token, setToken] = useState('');
   const [userData, setUserData] = useState([]);
 
@@ -37,26 +38,26 @@ export default function ListUsers() {
     loadListUsers();
   }, []);
 
-  const handleEditUser = (user_id) => {
+  const handleEditUser = (username) => {
     // Agrega la lógica para editar el usuario con el ID userId
     // Puedes navegar a una página de edición o mostrar un formulario de edición aquí
   };
 
-  const handleDeleteUser = (user_id) => {
+  const handleDeleteUser = (username) => {
     // Muestra el modal de confirmación antes de borrar el usuario
     setModalDeleteUser(true);
-    setSelectedUserId(user_id);
+    setSelectedUserUsername(username);
   };
 
   const closeModalDeleteUser = () => {
     setModalDeleteUser(false);
-    setSelectedUserId(null);
+    setSelectedUserUsername(null);
   };
 
   const deleteSelectedUser = () => {
-    if (selectedUserId) {
-      console.log(`Borrando usuario con ID: ${selectedUserId}`);
-      fetch(`http://localhost:8080/listusers/${selectedUserId}`, {
+    if (selectedUserUsername) {
+      console.log(`Borrando usuario con username: ${selectedUserUsername}`);
+      fetch(`http://localhost:8080/users/${selectedUserUsername}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())
@@ -94,7 +95,8 @@ export default function ListUsers() {
   if (token !== '' && token !== null && userData && userData.rol_id === 1) {
   return (
     <>
-      <div className="container">
+      <div className="container rounded" id="listusers">
+        <h2>LISTA DE USUARIOS</h2>
         {listUsers.map((userlist, index) => (
           <div className="row" key={index}>
             <div className="col">
@@ -110,29 +112,32 @@ export default function ListUsers() {
               <strong>Rol: </strong>
               <span>{userlist.rol_name}</span>
               <br />
+              <div className='justify-content-between'>
               <button
                 className="btn btn-primary material-symbols-outlined"
-                onClick={() => handleEditUser(userlist.user_id)}
+                onClick={() => handleEditUser(userlist.username)}
               >
                 edit
               </button>
               <button
                 className="btn btn-danger material-symbols-outlined"
-                onClick={() => handleDeleteUser(userlist.user_id)}
+                onClick={() => handleDeleteUser(userlist.username)}
               >
                 delete
               </button>
+              </div>
               <hr />
             </div>
           </div>
         ))}
       </div>
 
-      <Modal show={modalDeleteUser} onHide={closeModalDeleteUser}>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Title>Confirmación de eliminación</Modal.Title>
+      <Modal id="ModalDeleteUser" show={modalDeleteUser} onHide={closeModalDeleteUser}>
+        <Modal.Header>
+          <Modal.Title>Eliminar Usuario</Modal.Title>
+          </Modal.Header>
         <Modal.Body>¿Seguro que deseas eliminar el usuario?</Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='justify-content-center'>
           <Button variant="danger" onClick={deleteSelectedUser}>
             Confirmar
           </Button>
