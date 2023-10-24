@@ -91,77 +91,85 @@ export default function NavBar()  {
     } else if (token !== '' && token !== null && userData.rol_id === 2) {
       return (
         <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid" id="NavBar">
-        <div className="container">
-          <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
-          <button
-            className="navbar-toggler bg-body-tertiary" // Cambié la clase aquí
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarScroll"
-            aria-controls="navbarScroll"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarScroll">
-            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ height: '100%' }}>
-              <li className="nav-item">
-                <Link to="/home" className="nav-link active" aria-current="page">Inicio</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/products" className="nav-link">Productos</Link>
-              </li>
-              <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" aria-label="Search" placeholder='Buscar...' />
-                <button className="btn btn-outline-success" type="submit">Buscar</button>
-              </form>
-            </ul>
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to="/account" className="nav-link">Cuenta</Link>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link" onClick={logout}>Cerrar sesión</button>
-              </li>
-              <li className="nav-item">
-              <Link to="/cart" className="nav-link">Carrito</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      </>
-      );
-    } else {
-      return (
-        <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
-          <div className="container">
+          <div className="container-fluid custom-navbar" id="NavBar">
             <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <button
+              className="navbar-toggler bg-body-tertiary" // Cambié la clase aquí
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarScroll"
+              aria-controls="navbarScroll"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarScroll">
               <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ height: '100%' }}>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link active" aria-current="page">Inicio</Link>
+                  <Link to="/home" className="nav-link">INICIO</Link>
                 </li>
                 <li className="nav-item">
-                <Link to="/products" className="nav-link">Productos</Link>
+                  <Link to="/products" className="nav-link">PRODUCTOS</Link>
                 </li>
                 <form className="d-flex" role="search">
-                  <input className="form-control me-2" type="search" aria-label="Search" placeholder='Buscar...' />
-                  <button className="btn btn-outline-success" type="submit">Buscar</button>
+                  <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
+                  <button className="btn btn-outline-success" type="submit">BUSCAR</button>
                 </form>
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to="/login" className="nav-link">Ingresar</Link>
+                  <Link to="/account" className="nav-link material-symbols-outlined" title='Cuenta'>account_circle</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/register" className="nav-link">Registrarse</Link>
+                  <button className="nav-link material-symbols-outlined" onClick={logout} title='Cerrar Sesión'>logout</button>
+                </li>
+                <li className="nav-item">
+                <Link to="/cart" className="nav-link material-symbols-outlined" title='Carrito'>shopping_cart</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        </>
+      );
+    } else {
+      return (
+        <>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
+          <div className="container-fluid custom-navbar" id="NavBar">
+            <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
+            <button
+              className="navbar-toggler bg-body-tertiary" // Cambié la clase aquí
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarScroll"
+              aria-controls="navbarScroll"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarScroll">
+              <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ height: '100%' }}>
+                <li className="nav-item">
+                  <Link to="/home" className="nav-link">INICIO</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/products" className="nav-link">PRODUCTOS</Link>
+                </li>
+                <form className="d-flex" role="search" id="search-form">
+                  <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
+                  <button className="btn btn-outline-success" type="submit">BUSCAR</button>
+                </form>
+              </ul>
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link material-symbols-outlined" title='Iniciar sesión'>login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/register" className="nav-link material-symbols-outlined" title='Registrarse'>app_registration</Link>
                 </li>
               </ul>
             </div>

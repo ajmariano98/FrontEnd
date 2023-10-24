@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './Login.css'
 
 
 
@@ -91,38 +92,18 @@ export default function Login() {
 
   return (
     <>
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <input
-            type="username"
-            className="form-control"
-            id="inputUsername"
-            aria-describedby="userHelp"
-            minLength={4}
-            placeholder="Nombre de Usuario"
-            onChange={handleChangeUsername}
-            value={username}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            type="password"
-            className="form-control"
-            aria-describedby="passwordHelp"
-            id="inputPassword"
-            minLength={4}
-            placeholder="Contraseña"
-            onChange={handleChangePassword}
-            value={password}
-          />
-        </div>
-        <div className="d-flex justify-content-between">
-          <button type="submit" className="btn btn-primary">
-            Ingresar
-          </button>
-        </div>
-      </form>
+    <div className="login-form">
+    <form onSubmit={handleSubmit}>
+        <h3>Iniciar Sesión</h3>
+
+        <label for="username">Nombre de Usuario</label>
+        <input type="username" autoComplete='off' placeholder="Mínimo de 4 caracteres." id="inputUsername" minLength={4} onChange={handleChangeUsername} value={username} required/>
+
+        <label for="password">Contraseña</label>
+        <input type="password" placeholder="Mínimo de 4 caracteres." id="inputPassword" minLength={4} onChange={handleChangePassword} value={password}/>
+
+        <button type="submit">Ingresar</button>
+    </form>
     </div>
     </>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Modal } from 'react-bootstrap';
+import './Categories.css'
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -183,12 +184,13 @@ export default function Categories() {
     return (
       <>
         <div className="container">
-          <div className="row">
+          <div className="row create-category-row rounded">
             <div className="col-md-12">
-              <h2 className="d-inline">Crear una Categoría</h2>
+              <h2 className="d-inline">NUEVA CATEGORÍA</h2>
               <form className="form-inline d-inline ml-3">
                 <div className="form-group">
                   <input
+                  id="input-create-category"
                     type="text"
                     className="form-control"
                     value={newCategoryName}
@@ -196,16 +198,17 @@ export default function Categories() {
                     placeholder="Nombre de categoría"
                   />
                 </div>
-                <button className="btn btn-primary ml-2" onClick={createCategory}>
-                  Crear Categoría
+                <button className="btn btn-primary ml-2" id="btn-create-category" onClick={createCategory}>
+                  CREAR CATEGORÍA
                 </button>
               </form>
             </div>
           </div>
           <hr />
-          <div className="row">
+          <div className="row categories-row rounded">
             <div className="col-md-12">
-              <h2>Lista de Categorías</h2>
+              <h2>CATEGORÍAS</h2>
+              <div className="table-responsive">
               <table className="table table-hover table-hover table-bordered">
                 <thead className="thead-dark">
                   <tr>
@@ -229,11 +232,12 @@ export default function Categories() {
                           category.category_name
                         )}
                       </td>
-                      <td>
+                      <td className='justify-content-between'>
                         {editingCategory === category.category_id ? (
                           <button
                             className="btn btn-success material-symbols-outlined"
                             title="Guardar"
+                            id="btn-save-category"
                             onClick={() => saveCategory(category.category_id, categoryName)}
                           >
                             save
@@ -241,6 +245,7 @@ export default function Categories() {
                         ) : (
                           <button
                             className="btn btn-primary material-symbols-outlined"
+                            id="btn-edit-category"
                             title="Editar"
                             onClick={() => editCategory(category.category_id)}
                           >
@@ -250,6 +255,7 @@ export default function Categories() {
                         <button
                           className="btn btn-danger material-symbols-outlined"
                           title="Borrar"
+                          id="btn-delete-category"
                           onClick={() => showModal(category.category_id)}
                         >
                           delete
@@ -259,22 +265,24 @@ export default function Categories() {
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
 
-          <Modal show={modal} onHide={closeModal}>
-            <Modal.Header closeButton></Modal.Header>
-            <Modal.Title>Confirmación de eliminación</Modal.Title>
-            <Modal.Body>¿Seguro que deseas eliminar la categoría?</Modal.Body>
-            <Modal.Footer>
-              <Button variant="danger" onClick={deleteCategory}>
-                Confirmar
-              </Button>
-              <Button variant="primary" onClick={closeModal}>
-                Cancelar
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <Modal id="ModalDelete" show={modal} onHide={closeModal}>
+  <Modal.Header>
+    <Modal.Title>Eliminar Categoría</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>¿Seguro que deseas eliminar esta categoría?</Modal.Body>
+  <Modal.Footer className='justify-content-center'>
+    <Button variant="danger" onClick={deleteCategory}>
+      Confirmar
+    </Button>
+    <Button variant="primary" onClick={closeModal}>
+      Cancelar
+    </Button>
+  </Modal.Footer>
+</Modal>
         </div>
       </>
     );

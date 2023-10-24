@@ -11,6 +11,12 @@
     z-index: 999; /* Asegura que la barra de navegación esté por encima de otros elementos */
 }
 
+#search-form {
+    position: relative;
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    width: 300px; /* Establece el ancho deseado para el formulario */
+  }
+
 nav {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
@@ -20,7 +26,8 @@ nav {
 
 .navbar {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 750;
+    font-weight: 700;
+    font-size: 16px;
 }
 
 
@@ -33,7 +40,7 @@ nav {
 
 .nav-link:hover {
     color: rgb(255, 255, 255) !important;
-    background-image: linear-gradient(to top, #646464, transparent);
+    text-shadow: 0 0 10px rgb(247, 247, 247);
     border-radius: 10px
 }
 
@@ -70,8 +77,9 @@ nav {
 }
 
 .custom-navbar .form-control:focus {
+    color: black;
     border-color: white; /* Cambia el color del borde al blanco cuando el input está enfocado */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Cambia el brillo del borde cuando el input está enfocado */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Cambia el brillo del borde cuando el input está enfocado */
 }
 
 .nav-item.dropdown {

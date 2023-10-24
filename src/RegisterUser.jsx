@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './RegisterUser.css'
 
 export default function RegisterUser() {
   const [user, setUser] = useState({
@@ -19,6 +20,8 @@ export default function RegisterUser() {
       password: user.password,
     };
 
+    
+
     let fetchData = {
       method: 'POST',
       body: JSON.stringify(userToRegister),
@@ -26,6 +29,8 @@ export default function RegisterUser() {
         'Content-Type': 'application/json',
       },
     };
+
+    console.log(userToRegister)
 
     fetch('http://localhost:8080/users', fetchData)
       .then((res) => res.json())
@@ -58,66 +63,55 @@ export default function RegisterUser() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
+    console.log({ user, [name]: value })
+    setUser({ user, [name]: value });
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <input
-            type="username"
-            className="form-control"
-            id="inputUsername"
-            aria-describedby="userHelp"
-            minLength={4}
-            placeholder="Nombre de Usuario"
-            name="username"
-            onChange={handleChange}
-            value={user.username}
-            required
-          />
-          <div id="userHelp" className="form-text">
-            Debe contener un mínimo de 4 caracteres.
-          </div>
-          <input
-            type="email"
-            className="form-control"
-            id="inputEmail"
-            placeholder="Dirección de correo electrónico"
-            autoComplete="on"
-            name="email"
-            onChange={handleChange}
-            value={user.email}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            type="password"
-            className="form-control"
-            aria-describedby="passwordHelp"
-            id="inputPassword"
-            minLength={4}
-            placeholder="Contraseña"
-            name="password"
-            onChange={handleChange}
-            value={user.password}
-            required
-          />
-          <div id="passwordHelp" className="form-text">
-            Debe contener un mínimo de 4 caracteres.
-          </div>
-        </div>
+    <>
+    <div className="register-form">
+    <form onSubmit={handleSubmit}>
+        <h3>Registrarse</h3>
+
+        <label for="username">Nombre de Usuario</label>
+        <input 
+        type="username" 
+        autoComplete='off' 
+        placeholder="Mínimo de 4 caracteres." 
+        id="inputUsername" 
+        minLength={4} 
+        onChange={handleChange}
+        name="username"
+        value={user.username} 
+        required/>
+        
+        <label for="email">Correo electrónico</label>
+        <input type="email" 
+        autoComplete='off' 
+        placeholder="user@example.com" 
+        id="inputEmail" 
+        onChange={handleChange}
+        name="email"
+        value={user.email} 
+        required
+        />
+        
+        <label for="password">Contraseña</label>
+        <input type="password" 
+        placeholder="Mínimo de 4 caracteres." 
+        id="inputPassword" 
+        minLength={4} 
+        onChange={handleChange} 
+        value={user.password}
+        name="password"
+        required
+        />
         <div className="d-flex justify-content-between">
-          <button type="submit" className="btn btn-primary">
-            Registrar
-          </button>
-          <button type="reset" className="btn btn-secondary">
-            Cancelar
-          </button>
+        <button type="submit" className="submit-btn">Registrar</button>
+        <button type="reset" className="reset-btn">Cancelar</button>
         </div>
-      </form>
+    </form>
     </div>
+    </>
   );
 }
