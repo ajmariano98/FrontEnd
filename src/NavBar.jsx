@@ -61,15 +61,15 @@ export default function NavBar()  {
                   <Link to="/listusers" className="nav-link">USUARIOS</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/listproducts" className="nav-link">CATÁLOGO</Link>
+                  <Link to="/registerproduct" className="nav-link">CARGAR PRODUCTO</Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/categories" className="nav-link">CATEGORÍAS</Link>
                 </li>
-                <form className="d-flex" role="search">
+                {/* <form className="d-flex" role="search">
                   <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
                   <button className="btn btn-outline-success" type="submit">BUSCAR</button>
-                </form>
+                </form> */}
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -91,7 +91,7 @@ export default function NavBar()  {
     } else if (token !== '' && token !== null && userData.rol_id === 2) {
       return (
         <>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
+         <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
           <div className="container-fluid custom-navbar" id="NavBar">
             <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
             <button
@@ -113,10 +113,10 @@ export default function NavBar()  {
                 <li className="nav-item">
                   <Link to="/products" className="nav-link">PRODUCTOS</Link>
                 </li>
-                <form className="d-flex" role="search">
+                {/* <form className="d-flex" role="search">
                   <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
                   <button className="btn btn-outline-success" type="submit">BUSCAR</button>
-                </form>
+                </form> */}
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -137,7 +137,7 @@ export default function NavBar()  {
     } else {
       return (
         <>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
+         <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
           <div className="container-fluid custom-navbar" id="NavBar">
             <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
             <button
@@ -159,17 +159,17 @@ export default function NavBar()  {
                 <li className="nav-item">
                   <Link to="/products" className="nav-link">PRODUCTOS</Link>
                 </li>
-                <form className="d-flex" role="search" id="search-form">
+                {/* <form className="d-flex" role="search">
                   <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
                   <button className="btn btn-outline-success" type="submit">BUSCAR</button>
-                </form>
+                </form> */}
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to="/login" className="nav-link material-symbols-outlined" title='Iniciar sesión'>login</Link>
+                  <Link to="/login" className="nav-link material-symbols-outlined" title='Ingresar'>login</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/register" className="nav-link material-symbols-outlined" title='Registrarse'>app_registration</Link>
+                <Link to="/register" className="nav-link material-symbols-outlined" title='Registrarse'>app_registration</Link>
                 </li>
               </ul>
             </div>

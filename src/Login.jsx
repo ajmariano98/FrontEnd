@@ -97,7 +97,7 @@ export default function Login() {
         <h3>Iniciar Sesión</h3>
 
         <label for="username">Nombre de Usuario</label>
-        <input type="username" autoComplete='off' placeholder="Mínimo de 4 caracteres." id="inputUsername" minLength={4} onChange={handleChangeUsername} value={username} required/>
+        <input type="username" autoComplete='on' placeholder="Mínimo de 4 caracteres." id="inputUsername" minLength={4} onChange={handleChangeUsername} value={username} required/>
 
         <label for="password">Contraseña</label>
         <input type="password" placeholder="Mínimo de 4 caracteres." id="inputPassword" minLength={4} onChange={handleChangePassword} value={password}/>

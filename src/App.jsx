@@ -13,7 +13,7 @@ import Account from './Account';
 import Products from './Products';
 import Cart from './Cart';
 import './App.css';
-
+import Test from './test';
 
 export default function App() {
  
@@ -33,6 +33,7 @@ export default function App() {
       <Route path="/" element={<Home />}></Route>
       <Route path="/products" element={<Products />}></Route>
       <Route path="/cart" element={<Cart />}></Route>
+      <Route path="/test" element={<Test />}></Route>
     </Routes>
     <ToastContainer />
     </div>

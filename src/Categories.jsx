@@ -289,7 +289,7 @@ export default function Categories() {
   } else {
     return (
       <>
-        <h2>Acceso denegado</h2>
+        <h2 id="access-denied" className='rounded'>No posee acceso, ingrese con una cuenta administrador</h2>
       </>
     );
   }

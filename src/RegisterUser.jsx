@@ -82,7 +82,7 @@ export default function RegisterUser() {
         <label for="username">Nombre de Usuario</label>
         <input 
         type="username" 
-        autoComplete='off' 
+        autoComplete='on' 
         placeholder="Mínimo de 4 caracteres." 
         id="inputUsername" 
         minLength={4} 
@@ -93,7 +93,7 @@ export default function RegisterUser() {
         
         <label for="email">Correo electrónico</label>
         <input type="email" 
-        autoComplete='off' 
+        autoComplete='on' 
         placeholder="user@example.com" 
         id="inputEmail" 
         onChange={handleEmailChange}

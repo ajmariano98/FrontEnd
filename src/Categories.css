@@ -180,3 +180,15 @@
   font-weight: 600;
   margin-top: 20px;
 }
+
+#access-denied {
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  text-shadow: 0 0 10px rgb(0,0,0, 1);
+  text-align: center;
+  background-color: rgb(29,29,29, 0.9);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 0 0 10px rgb(0,0,0, 0,9);
+}

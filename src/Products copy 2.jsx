@@ -14,32 +14,6 @@ export default function Products() {
   const [editingProductId, setEditingProductId] = useState(null);
   const [token, setToken] = useState('');
   const [userData, setUserData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const searchProducts = async () => {
-    try {
-      // Construye la URL con los parámetros de búsqueda
-      const url = new URL('http://localhost:8080/search');
-      url.searchParams.append('name', searchQuery);
-      url.searchParams.append('category', selectedCategory); // Agrega el parámetro de categoría
-
-      // Realiza la solicitud al servidor para buscar productos
-      const response = await fetch(url);
-
-      if (response.ok) {
-        // Si la solicitud es exitosa, obtén los resultados y actualiza la lista de productos
-        const data = await response.json();
-        setProductsList(data);
-      } else {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error
-        console.error('Error en la búsqueda de productos');
-      }
-    } catch (error) {
-      console.error('Error en la solicitud:', error);
-    }
-  };
-
-
 
   const loadCategories = () => {
     fetch('http://localhost:8080/categorieslist')
@@ -54,13 +28,8 @@ export default function Products() {
 
   const loadProducts = () => {
     let url = 'http://localhost:8080/productslist';
-
     if (selectedCategory !== "") {
       url += `/category/${selectedCategory}`;
-    }
-
-    if (searchQuery.trim() !== '') {
-      url += `/search?name=${searchQuery}`;
     }
 
     fetch(url)
@@ -75,9 +44,7 @@ export default function Products() {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    searchProducts(); // Llamar a searchProducts al cambiar la categoría
   };
-  
 
   useEffect(() => {
     const t = sessionStorage.getItem('token');
@@ -92,9 +59,8 @@ export default function Products() {
   }, [token]);
 
   useEffect(() => {
-    searchProducts();
-  }, [selectedCategory, searchQuery]);
-  
+    loadProducts();
+  }, [selectedCategory]);
 
   const formatAsCurrency = (value) => {
     return new Intl.NumberFormat('es-AR', {
@@ -215,30 +181,15 @@ export default function Products() {
           <div class="row">
             <hr />
             <div class="col-md-3 filters">
-              <h2>BUSCAR POR NOMBRE</h2>
-              <form id="search" className="d-flex" role="search">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="..."
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                      event.preventDefault(); // Prevenir la recarga de la página
-                      // Lógica para realizar la búsqueda y actualizar la lista de productos
-                      searchProducts();
-                    }
-                  }}
-                />
-
-
-              </form>
-              <hr />
+            <h2>BUSCAR POR NOMBRE</h2>
+            <form id="search" className="d-flex" role="search">
+                  <input className="form-control me-2" type="search" placeholder='...' />
+                </form>
+                <hr />
               <h2>FILTRAR POR CATEGORÍAS</h2>
               <select
                 value={selectedCategory}
-                onChange={(event) => handleCategoryChange(event.target.value)}
+                onChange={(e) => handleCategoryChange(e.target.value)}
               >
                 <option value="">Todas</option>
                 {categories.map((category) => (
@@ -247,7 +198,7 @@ export default function Products() {
                   </option>
                 ))}
               </select>
-
+              
             </div>
             <div class="col-md-9 products">
               <ul class="product-list">
@@ -325,32 +276,11 @@ export default function Products() {
       <>
         <div class="container">
           <div class="row">
-            <hr />
             <div class="col-md-3 filters">
-              <h2>BUSCAR POR NOMBRE</h2>
-              <form id="search" className="d-flex" role="search">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="..."
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                      event.preventDefault(); // Prevenir la recarga de la página
-                      // Lógica para realizar la búsqueda y actualizar la lista de productos
-                      searchProducts();
-                    }
-                  }}
-                />
-
-
-              </form>
-              <hr />
               <h2>FILTRAR POR CATEGORÍAS</h2>
               <select
                 value={selectedCategory}
-                onChange={(event) => handleCategoryChange(event.target.value)}
+                onChange={(e) => handleCategoryChange(e.target.value)}
               >
                 <option value="">Todas</option>
                 {categories.map((category) => (
@@ -359,7 +289,6 @@ export default function Products() {
                   </option>
                 ))}
               </select>
-
             </div>
             <div class="col-md-9 products">
               <ul class="product-list">
