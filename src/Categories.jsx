@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Modal } from 'react-bootstrap';
-import './Categories.css'
+import './styles/Categories.css'
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);

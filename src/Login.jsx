@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './Login.css'
+import './styles/Login.css'
 
 
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  
- 
 
   const handleChangeUsername = (event) => {
     setUsername(event.target.value);

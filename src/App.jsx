@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Account from './Account';
 import Products from './Products';
 import Cart from './Cart';
-import './App.css';
+import './styles/App.css';
 import Test from './test';
 
 export default function App() {

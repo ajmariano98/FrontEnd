@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import EditProduct from './EditProduct';
-import './Products.css'
+import './styles/Products.css'
 
 export default function Products() {
   const [categories, setCategories] = useState([]);
@@ -165,7 +165,7 @@ export default function Products() {
           'Content-Type': 'application/json',
           'Authorization': sessionStorage.getItem('token'),
         },
-        body: JSON.stringify({ user_id: userData.user_id, product_id: product_id, quantity: 1 }) // Asumiendo que la cantidad es 1 por defecto.
+        body: JSON.stringify({ user_id: userData.user_id, product_id: product_id, quantity: 1 })
       })
         .then((res) => res.json())
         .then((data) => {
@@ -215,24 +215,20 @@ export default function Products() {
           <div class="row">
             <hr />
             <div class="col-md-3 filters">
-              <h2>BUSCAR POR NOMBRE</h2>
               <form id="search" className="d-flex" role="search">
                 <input
                   className="form-control me-2"
                   type="search"
-                  placeholder="..."
+                  placeholder="Buscar nombre, marca, etc..."
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
-                      event.preventDefault(); // Prevenir la recarga de la página
-                      // Lógica para realizar la búsqueda y actualizar la lista de productos
+                      event.preventDefault();
                       searchProducts();
                     }
                   }}
                 />
-
-
               </form>
               <hr />
               <h2>FILTRAR POR CATEGORÍAS</h2>
@@ -294,9 +290,6 @@ export default function Products() {
             </div>
           </div>
         </div>
-
-
-
         <Modal id="ModalDeleteProduct" show={modalDeleteProduct} onHide={closeModal}>
           <Modal.Header>
             <Modal.Title>Eliminar Producto</Modal.Title>
@@ -327,12 +320,11 @@ export default function Products() {
           <div class="row">
             <hr />
             <div class="col-md-3 filters">
-              <h2>BUSCAR POR NOMBRE</h2>
               <form id="search" className="d-flex" role="search">
                 <input
                   className="form-control me-2"
                   type="search"
-                  placeholder="..."
+                  placeholder="Buscar nombre, marca, etc..."
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   onKeyDown={(event) => {
@@ -343,8 +335,6 @@ export default function Products() {
                     }
                   }}
                 />
-
-
               </form>
               <hr />
               <h2>FILTRAR POR CATEGORÍAS</h2>
@@ -359,7 +349,6 @@ export default function Products() {
                   </option>
                 ))}
               </select>
-
             </div>
             <div class="col-md-9 products">
               <ul class="product-list">
@@ -396,3 +385,4 @@ export default function Products() {
     );
   }
 }
+

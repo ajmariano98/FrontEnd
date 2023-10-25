@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/RegisterProduct.css'
 
 export default function RegisterProduct() {
   const [name, setName] = useState('');
   const [brand, setBrand] = useState('');
   const [category_id, setCategory] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [photo, setPhoto] = useState('');
   const [description, setDescription] = useState('');
   const [categories, setCategories] = useState([]);
@@ -135,105 +136,94 @@ export default function RegisterProduct() {
 
   if (token !== '' && token !== null && userData && userData.rol_id === 1) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <div className="mb-3">
-              <label htmlFor="inputName" className="form-label">
-                Nombre del Producto:
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                name="name"
-                onChange={handleChange}
-                value={name}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="inputBrand" className="form-label">
-                Marca:
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                name="brand"
-                onChange={handleChange}
-                value={brand}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="inputCategory" className="form-label">
-                Categoría:
-              </label>
-              <select
-                className="form-select"
-                name="category_id"
-                value={category_id}
-                onChange={handleChange}
-                required
-              >
-                <option value="" disabled>
-                  Seleccione una categoría
-                </option>
-                {categories.map((category) => (
-                  <option key={category.category_id} value={category.category_id}>
-                    {category.category_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="inputPrice" className="form-label">
-                Precio:
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                name="price"
-                onChange={handleChange}
-                value={price}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="inputPhoto" className="form-label">
-                URL de la Foto:
-              </label>
-              <input
-                type="url"
-                className="form-control"
-                name="photo"
-                onChange={handleChange}
-                value={photo}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="inputDescription" className="form-label">
-                Descripción:
-              </label>
-              <textarea
-                className="form-control"
-                name="description"
-                onChange={handleChange}
-                value={description}
-                required
-              />
-            </div>
-          </div>
-          <div className="d-flex justify-content-between">
-            <button type="submit" className="btn btn-primary">
-              Cargar
-            </button>
-            <button type="button" className="btn btn-secondary" onClick={clearForm}>
-              Limpiar
-            </button>
-          </div>
-        </form>
-      </div>
+      <div className='rounded' id='upload-product-form'>
+  <h2>CARGAR PRODUCTO</h2>
+  <form onSubmit={handleSubmit}>
+    <div className='form-group'>
+      <label>Nombre:</label>
+      <input
+        type='text'
+        className='form-control'
+        name='name'
+        onChange={handleChange}
+        value={name}
+        required
+      />
+    </div>
+    <div className='form-group'>
+      <label>Marca:</label>
+      <input
+        type='text'
+        className='form-control'
+        name='brand'
+        onChange={handleChange}
+        value={brand}
+        required
+      />
+    </div>
+    <div className='form-group'>
+      <label>Categoría:</label>
+      <select
+        className='form-select'
+        name='category_id'
+        value={category_id}
+        onChange={handleChange}
+        required
+      >
+        <option value='' disabled>
+          Seleccione una categoría
+        </option>
+        {categories.map((category) => (
+          <option key={category.category_id} value={category.category_id}>
+            {category.category_name}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className='form-group'>
+      <label>Precio:</label>
+      <input
+        type='number'
+        className='form-control'
+        name='price'
+        onChange={handleChange}
+        value={price}
+        required
+      />
+    </div>
+    <div className='form-group'>
+      <label>URL de la Foto:</label>
+      <input
+        type='text'
+        className='form-control'
+        name='photo'
+        onChange={handleChange}
+        value={photo}
+        required
+      />
+    </div>
+    <div className='form-group'>
+      <label>Descripción:</label>
+      <textarea
+        className='form-control'
+        name='description'
+        onChange={handleChange}
+        value={description}
+        required
+        rows='4'  // Ajusta la cantidad de filas que se muestran
+      />
+    </div>
+    <div className='btn-large'>
+      <button type='submit' title='Cargar' className='save material-symbols-outlined'>
+        publish
+      </button>
+      <button type='button' title='Limpiar' className='cancel material-symbols-outlined' onClick={clearForm}>
+       mop
+      </button>
+    </div>
+  </form>
+</div>
+
     );
   } else {
     return (
@@ -241,3 +231,6 @@ export default function RegisterProduct() {
     );
   }
 }
+<span class="material-symbols-outlined">
+publish
+</span>

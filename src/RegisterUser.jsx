@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './RegisterUser.css'
+import './styles/RegisterUser.css'
 
 export default function RegisterUser() {
   const [user, setUser] = useState({
@@ -46,6 +46,8 @@ export default function RegisterUser() {
             progress: undefined,
             theme: "colored",
           });
+          
+          
         } else if (result.message) {
           toast.success(result.message, {
             position: "bottom-center",
@@ -57,6 +59,9 @@ export default function RegisterUser() {
             progress: undefined,
             theme: "colored",
           });
+          setTimeout(() => {
+            window.location.replace('/login');
+            }, 1000);
         }
       });
   };

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button } from 'react-bootstrap';
+import { Button, Table, Row, Col } from 'react-bootstrap';
+import './styles/Cart.css'
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -67,7 +68,7 @@ export default function Cart() {
         }
       });
   };
-
+  
   const deleteCartItems = (userId) => {
     return fetch(`http://localhost:8080/cart/${userId}`, {
       method: 'DELETE',
@@ -77,7 +78,8 @@ export default function Cart() {
       },
     }).then((res) => res.json());
   };
-
+   
+  
   const getToastOptions = () => {
     return {
       position: 'bottom-center',
@@ -92,54 +94,51 @@ export default function Cart() {
   };
 
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <h2>Carrito de Compras</h2>
-            {cartItems.length === 0 ? (
-              <p>El carrito está vacío.</p>
-            ) : (
-              <table className="table table-hover table-bordered">
-                <thead className="thead-dark">
-                  <tr>
-                    <th>ID</th>
-                    <th>Foto</th>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item) => (
-                    <tr key={item.cart_item_id}>
-                      <td>{item.cart_item_id}</td>
-                      <td>
-                        <img
-                          src={item.photo}
-                          alt={item.name}
-                          style={{ maxWidth: '100px' }}
-                        />
-                      </td>
-                      <td>{item.name}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.price}</td>
-                      <td>{item.quantity * item.price}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-            <div className="text-right">
-              <p>Total: ${total}</p>
-              <Button variant="danger" onClick={clearCart}>
-                Limpiar Carrito
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <div className="container rounded" id="cart-container">
+      <h2>CARRITO</h2>
+      {cartItems.length === 0 ? (
+        <p>El carrito está vacío.</p>
+      ) : (
+        <Table bordered hover>
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item) => (
+              <tr key={item.cart_item_id}>
+                <td>
+                  <img
+                    src={item.photo}
+                    alt={item.name}
+                    style={{ maxWidth: '100px' }}
+                  />
+                </td>
+                <td>{item.name}</td>
+                <td>{item.quantity}</td>
+                <td>${item.price}</td>
+                <td>${item.quantity * item.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      {cartItems.length > 0 && (
+        <Row className="justify-content-end">
+          <Col md="4">
+            <p>Total a abonar: ${total}</p>
+            <Button variant="success">COMPRAR</Button>
+            <Button variant="danger" title='Limpiar' className='material-symbols-outlined' onClick={clearCart}>
+              mop
+            </Button>
+          </Col>
+        </Row>
+      )}
+    </div>
   );
 }

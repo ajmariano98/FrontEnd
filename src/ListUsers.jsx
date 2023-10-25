@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import './ListUsers.css'
+import './styles/ListUsers.css'
 
 export default function ListUsers() {
   const [listUsers, setlistUsers] = useState([]);
@@ -100,9 +100,6 @@ export default function ListUsers() {
         {listUsers.map((userlist, index) => (
           <div className="row" key={index}>
             <div className="col">
-              <strong>ID: </strong>
-              <span>{userlist.user_id}</span>
-              <br />
               <strong>Nombre de Usuario: </strong>
               <span>{userlist.username}</span>
               <br />
@@ -113,12 +110,6 @@ export default function ListUsers() {
               <span>{userlist.rol_name}</span>
               <br />
               <div className='justify-content-between'>
-              <button
-                className="btn btn-primary material-symbols-outlined"
-                onClick={() => handleEditUser(userlist.username)}
-              >
-                edit
-              </button>
               <button
                 className="btn btn-danger material-symbols-outlined"
                 onClick={() => handleDeleteUser(userlist.username)}

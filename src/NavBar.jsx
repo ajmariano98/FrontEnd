@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.png';
-import './NavBar.css';
+import './styles/NavBar.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -39,7 +39,7 @@ export default function NavBar()  {
           <div className="container-fluid custom-navbar" id="NavBar">
             <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
             <button
-              className="navbar-toggler bg-body-tertiary" // Cambié la clase aquí
+              className="navbar-toggler bg-body-tertiary"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarScroll"
@@ -58,18 +58,14 @@ export default function NavBar()  {
                   <Link to="/products" className="nav-link">PRODUCTOS</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/listusers" className="nav-link">USUARIOS</Link>
-                </li>
-                <li className="nav-item">
                   <Link to="/registerproduct" className="nav-link">CARGAR PRODUCTO</Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/categories" className="nav-link">CATEGORÍAS</Link>
                 </li>
-                {/* <form className="d-flex" role="search">
-                  <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
-                  <button className="btn btn-outline-success" type="submit">BUSCAR</button>
-                </form> */}
+                <li className="nav-item">
+                  <Link to="/listusers" className="nav-link">USUARIOS</Link>
+                </li>
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -95,7 +91,7 @@ export default function NavBar()  {
           <div className="container-fluid custom-navbar" id="NavBar">
             <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
             <button
-              className="navbar-toggler bg-body-tertiary" // Cambié la clase aquí
+              className="navbar-toggler bg-body-tertiary" 
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarScroll"
@@ -113,10 +109,6 @@ export default function NavBar()  {
                 <li className="nav-item">
                   <Link to="/products" className="nav-link">PRODUCTOS</Link>
                 </li>
-                {/* <form className="d-flex" role="search">
-                  <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
-                  <button className="btn btn-outline-success" type="submit">BUSCAR</button>
-                </form> */}
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -139,9 +131,9 @@ export default function NavBar()  {
         <>
          <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
           <div className="container-fluid custom-navbar" id="NavBar">
-            <a className="navbar-brand" href="#"><img src={logo} alt="Logo" /></a>
+            <a className="navbar-brand" href="/home"><img src={logo} alt="Logo" /></a>
             <button
-              className="navbar-toggler bg-body-tertiary" // Cambié la clase aquí
+              className="navbar-toggler bg-body-tertiary" 
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarScroll"
@@ -159,10 +151,6 @@ export default function NavBar()  {
                 <li className="nav-item">
                   <Link to="/products" className="nav-link">PRODUCTOS</Link>
                 </li>
-                {/* <form className="d-flex" role="search">
-                  <input className="form-control me-2" type="search" aria-label="Search" placeholder='...' />
-                  <button className="btn btn-outline-success" type="submit">BUSCAR</button>
-                </form> */}
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">

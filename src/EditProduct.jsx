@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import './styles/EditProduct.css'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function EditProduct({ product_id, onClose }) {
   const [product, setProduct] = useState({});
@@ -16,7 +20,7 @@ export default function EditProduct({ product_id, onClose }) {
   };
 
   useEffect(() => {
-    // Carga el producto a editar desde el servidor utilizando product_id
+
     fetch(`http://localhost:8080/products/${product_id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -29,6 +33,21 @@ export default function EditProduct({ product_id, onClose }) {
   }, [product_id]);
 
   const updateProduct = () => {
+
+    if (!product.name || !product.brand || !product.category_id || !product.price || !product.photo || !product.description) {
+      toast.error('Por favor, complete todos los campos antes de guardar.', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+  
     // Realiza una solicitud al servidor para actualizar el producto
     const updatedProduct = {
       name: product.name,
@@ -38,7 +57,7 @@ export default function EditProduct({ product_id, onClose }) {
       photo: product.photo,
       description: product.description,
     };
-
+  
     fetch(`http://localhost:8080/products/${product_id}`, {
       method: 'PUT',
       headers: {
@@ -51,6 +70,16 @@ export default function EditProduct({ product_id, onClose }) {
         if (data.message) {
           // Muestra una notificación de éxito
           console.log('Producto actualizado exitosamente', data.message);
+          toast.success('Producto actualizado exitosamente.', {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
           // Cierra el modal de edición (puedes usar un callback para esto)
           onClose();
         } else if (data.error) {
@@ -59,9 +88,10 @@ export default function EditProduct({ product_id, onClose }) {
         }
       });
   };
+  
 
   return (
-    <div>
+    <div id='edit-product-form' className='rounded'>
       <h2>Editar Producto</h2>
       <div className="form-group">
         <label>Nombre:</label>
@@ -69,7 +99,6 @@ export default function EditProduct({ product_id, onClose }) {
           type="text"
           value={product.name}
           onChange={(event) => {
-            // Actualiza el campo "name" en el estado product
             setProduct({ ...product, name: event.target.value });
           }}
         />
@@ -79,8 +108,8 @@ export default function EditProduct({ product_id, onClose }) {
         <input
           type="text"
           value={product.brand}
+          required
           onChange={(event) => {
-            // Actualiza el campo "brand" en el estado product
             setProduct({ ...product, brand: event.target.value });
           }}
         />
@@ -91,11 +120,10 @@ export default function EditProduct({ product_id, onClose }) {
           className="form-select"
           name="category_id"
           value={product.category_id}
+          required
           onChange={(event) => {
-            // Actualiza el campo "category_id" en el estado product
             setProduct({ ...product, category_id: event.target.value });
           }}
-          required
         >
           <option value="" disabled>
             Seleccione una categoría
@@ -112,35 +140,39 @@ export default function EditProduct({ product_id, onClose }) {
         <input
           type="number"
           value={product.price}
+          required
           onChange={(event) => {
-            // Actualiza el campo "price" en el estado product
             setProduct({ ...product, price: event.target.value });
           }}
         />
       </div>
       <div className="form-group">
-        <label>Foto:</label>
+        <label>URL de Imagen:</label>
         <input
-          type="url"
+          type="text"
           value={product.photo}
+          required
           onChange={(event) => {
-            // Actualiza el campo "photo" en el estado product
             setProduct({ ...product, photo: event.target.value });
           }}
         />
       </div>
       <div className="form-group">
-        <label>Descripción:</label>
-        <input
-          type="text"
-          value={product.description}
-          onChange={(event) => {
-            // Actualiza el campo "description" en el estado product
-            setProduct({ ...product, description: event.target.value });
-          }}
-        />
-      </div>
-      <button onClick={updateProduct}>Guardar</button>
+  <label>Descripción:</label>
+  <textarea
+    id='description-input'
+    value={product.description}
+    required
+    onChange={(event) => {
+      setProduct({ ...product, description: event.target.value });
+    }}
+  />
+</div>
+
+      <div className='btn'>
+  <button className="cancel" onClick={onClose}>Cancelar</button>
+  <button className="save" onClick={updateProduct}>Guardar</button>
+</div>
     </div>
   );
 }
